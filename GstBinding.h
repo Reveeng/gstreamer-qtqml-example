@@ -12,7 +12,7 @@ class GstVideoPlayer : public BasePlayer
 {
     Q_OBJECT
 
-    Q_PROPERTY(QString uri READ uri WRITE setUri)
+    Q_PROPERTY(QString source READ source WRITE setSource)
 public:
     explicit GstVideoPlayer( QObject * parent = 0);
     ~GstVideoPlayer();
@@ -27,9 +27,9 @@ public slots:
 
     void stop();
 
-    QString uri() const;
+    QString source() const;
 
-    void setUri(QString uri);
+    void setSource(QString source);
 
 protected:
 
@@ -40,7 +40,7 @@ signals:
     void stopped();
     void newFrame(QVideoFrame *frame);
     void startedByBtn();
-    void uriChanged();
+    void sourceChanged();
 
 private slots:
     void tryToReconnect();
@@ -54,7 +54,6 @@ private:
 
 protected:
     QString m_source;
-    QString m_uri;
 };
 
 

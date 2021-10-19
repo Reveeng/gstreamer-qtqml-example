@@ -14,7 +14,7 @@ public:
     {
         m_bpp = 2;
         setFormat(QVideoSurfaceFormat(QSize(640,480), QVideoFrame::Format_UYVY));
-        m_source = "rtspsrc protocols=tcp location=% latency=0 ! rtpvrawdepay ! queue ! appsink max-buffers=3 drop=true emit-signals=true name=sink0";
+        m_source = "rtspsrc protocols=tcp location=<your device location> latency=0 ! rtpvrawdepay ! queue ! appsink max-buffers=3 drop=true emit-signals=true name=sink0";
     };
 };
 

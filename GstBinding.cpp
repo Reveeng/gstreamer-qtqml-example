@@ -15,7 +15,7 @@ GstVideoPlayer::GstVideoPlayer(QObject * parent) : BasePlayer(parent),
     gst_init(NULL, NULL);
 
     connect(this, &GstVideoPlayer::newFrame, this, &GstVideoPlayer::updateFrame);
-    connect(this, &GstVideoPlayer::uriChanged, this, &GstVideoPlayer::startByBtn);
+    connect(this, &GstVideoPlayer::sourceChanged, this, &GstVideoPlayer::startByBtn);
     connect(this, &GstVideoPlayer::reconnect, this, &GstVideoPlayer::tryToReconnect);
     connect(this, &GstVideoPlayer::startedByBtn, this, [=](){this->setEState(BasePlayer::Playing);});
 }
@@ -28,16 +28,15 @@ void GstVideoPlayer::tryToReconnect(){
     start();
 }
 
-QString GstVideoPlayer::uri() const{
-    return m_uri;
+QString GstVideoPlayer::source() const{
+    return m_source;
 }
 
-void GstVideoPlayer::setUri(QString uri){
-     if(m_uri == uri)
+void GstVideoPlayer::setSource(QString source){
+     if(m_source == source)
          return;
-     m_uri = uri;
-     m_source.replace("%",m_uri);
-     emit uriChanged();
+     m_source = source;
+     emit sourceChanged();
 }
 
 void GstVideoPlayer::startByBtn(){
